@@ -16,7 +16,7 @@ public class Escola implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id_Escola;
+	private int idEscola;
 
 	private String complemento;
 
@@ -25,6 +25,8 @@ public class Escola implements Serializable {
 	private String nome;
 
 	private String numero;
+	
+	private String cep;
 
 	//bi-directional many-to-one association to CursoEscola
 	@OneToMany(mappedBy="escola")
@@ -33,12 +35,12 @@ public class Escola implements Serializable {
 	public Escola() {
 	}
 
-	public int getId_Escola() {
-		return this.id_Escola;
+	public int getIdEscola() {
+		return this.idEscola;
 	}
 
-	public void setId_Escola(int id_Escola) {
-		this.id_Escola = id_Escola;
+	public void setIdEscola(int idEscola) {
+		this.idEscola = idEscola;
 	}
 
 	public String getComplemento() {
@@ -95,4 +97,11 @@ public class Escola implements Serializable {
 		return cursoEscola;
 	}
 
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
 }

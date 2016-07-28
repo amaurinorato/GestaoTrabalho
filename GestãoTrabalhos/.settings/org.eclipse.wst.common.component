@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="GestãoTrabalhos">
+    <wb-module deploy-name="GestaoTrabalhos">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="GestãoTrabalhos"/>
-        <property name="java-output-path" value="/GestãoTrabalhos/build/classes"/>
+        <property name="java-output-path" value="/GestaoTrabalhos/build/classes"/>
+        <property name="context-root" value="GestaoTrabalhos"/>
     </wb-module>
 </project-modules>

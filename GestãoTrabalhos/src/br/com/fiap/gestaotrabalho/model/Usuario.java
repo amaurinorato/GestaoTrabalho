@@ -26,6 +26,8 @@ public class Usuario implements Serializable {
 	private String matricula;
 
 	private String nome;
+	
+	private String senha;
 
 	//bi-directional many-to-one association to AlunoCurso
 	@OneToMany(mappedBy="usuario")
@@ -161,4 +163,12 @@ public class Usuario implements Serializable {
 		this.role = role;
 	}
 
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
 }
