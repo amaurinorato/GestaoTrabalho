@@ -1,0 +1,40 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<p:messages showDetail="true"/>
+<p:menu style="float: left; ">
+	<p:submenu label="Admin"
+		rendered="#{sessionScope.usuario_sessao.role.admin}">
+		<p:menuitem value="Cadastrar Escola"
+			outcome="/pages/admin/cadastroEscola" icon="ui-icon-star"></p:menuitem>
+		<p:menuitem value="Cadastrar Curso"
+			outcome="/pages/admin/cadastroCurso" ajax="false" icon="ui-icon-star"></p:menuitem>
+		<p:menuitem value="Cadastrar Disciplina"
+			outcome="/pages/admin/cadastroDisciplina" icon="ui-icon-star"></p:menuitem>
+		<p:menuitem value="Cadastrar Professor"
+			outcome="/pages/admin/cadastroProfessor" icon="ui-icon-star"></p:menuitem>
+	</p:submenu>
+
+	<p:submenu label="Professor"
+		rendered="#{sessionScope.usuario_sessao.role.professor}">
+		<p:menuitem value="Cadastrar Nota"
+			outcome="/pages/professor/cadastroNota" icon="ui-icon-star"></p:menuitem>
+		<p:menuitem value="Cadastrar Trabalhos"
+			outcome="/professor/cadastroTrabalho" icon="ui-icon-star"></p:menuitem>
+	</p:submenu>
+
+	<p:submenu label="Aluno"
+		rendered="#{sessionScope.usuario_sessao.role.aluno}">
+		<p:menuitem value="Consultar Nota" outcome="/pages/aluno/consultaNota"
+			icon="ui-icon-star"></p:menuitem>
+	</p:submenu>
+	
+	<p:submenu label="Logout">
+		<p:menuitem value="Sair" action="#{usuarioBean.sair}" ajax="false"
+			icon="ui-icon-power"></p:menuitem>
+	</p:submenu>
+</p:menu>
+</html>
