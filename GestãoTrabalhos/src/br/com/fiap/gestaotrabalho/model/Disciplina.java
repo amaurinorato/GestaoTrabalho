@@ -16,7 +16,8 @@ public class Disciplina implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id_Disciplina;
+	@Column(name="id_disciplina")
+	private int idDisciplina;
 
 	@Column(name="carga_horaria")
 	private int cargaHoraria;
@@ -36,14 +37,6 @@ public class Disciplina implements Serializable {
 	private List<Trabalho> trabalhos;
 
 	public Disciplina() {
-	}
-
-	public int getId_Disciplina() {
-		return this.id_Disciplina;
-	}
-
-	public void setId_Disciplina(int id_Disciplina) {
-		this.id_Disciplina = id_Disciplina;
 	}
 
 	public int getCargaHoraria() {
@@ -128,4 +121,49 @@ public class Disciplina implements Serializable {
 		return trabalho;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + cargaHoraria;
+		result = prime * result + idDisciplina;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((trabalhos == null) ? 0 : trabalhos.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Disciplina other = (Disciplina) obj;
+		if (cargaHoraria != other.cargaHoraria)
+			return false;
+		if (idDisciplina != other.idDisciplina)
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (trabalhos == null) {
+			if (other.trabalhos != null)
+				return false;
+		} else if (!trabalhos.equals(other.trabalhos))
+			return false;
+		return true;
+	}
+
+	public int getIdDisciplina() {
+		return idDisciplina;
+	}
+
+	public void setIdDisciplina(int idDisciplina) {
+		this.idDisciplina = idDisciplina;
+	}
+	
 }

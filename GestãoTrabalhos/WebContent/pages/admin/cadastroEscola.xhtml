@@ -10,17 +10,21 @@
 
 <h:body>
 	<h:form>
-		<p:panelGrid columns="2"> 
-		<p:outputLabel value="Nome: " />
-		<p:inputText  value="#{escolaBean.escola.nome}" />
-		<p:outputLabel value="Endereço: " />
-		<p:inputText  value="#{escolaBean.escola.endereco}" />
-		<p:outputLabel value="Número: " />
-		<p:inputText  value="#{escolaBean.escola.numero}" />
-		<p:outputLabel value="Complemento: " />
-		<p:inputText  value="#{escolaBean.escola.complemento}" />
-		<p:commandButton value="Incluir" action="#{escolaBean.incluirEscola()}" />
-		</p:panelGrid>
+		<ui:include src="../menu.xhtml"></ui:include>
+		<h1 style="font-family: Arial;">Cadastro de Escola</h1>
+		<h:panelGrid columns="2" border="0" style="margin-left: 0px"> 
+			<p:outputLabel value="Nome: " />
+			<p:inputText  value="#{escolaBean.escola.nome}" />
+			<p:outputLabel value="Cep: " />
+			<p:inputText  value="#{escolaBean.escola.cep}" />
+			<p:outputLabel value="Endereço: " />
+			<p:inputText  value="#{escolaBean.escola.endereco}" size="60"/>
+			<p:outputLabel value="Número: " />
+			<p:inputText  value="#{escolaBean.escola.numero}" />
+			<p:outputLabel value="Complemento: " />
+			<p:inputText  value="#{escolaBean.escola.complemento}" />
+			<h:commandButton value="Incluir" actionListener="#{escolaBean.salvarEscola()}" />
+		</h:panelGrid>
 	</h:form>
 </h:body>
 </html>

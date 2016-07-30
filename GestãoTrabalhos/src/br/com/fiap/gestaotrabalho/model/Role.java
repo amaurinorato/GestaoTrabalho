@@ -25,7 +25,7 @@ public class Role implements Serializable {
 	//bi-directional many-to-one association to Usuario
 	@OneToMany(mappedBy="role")
 	private List<Usuario> usuarios;
-
+	
 	public Role() {
 	}
 
@@ -73,6 +73,18 @@ public class Role implements Serializable {
 		usuario.setRole(null);
 
 		return usuario;
+	}
+	
+	public boolean getAdmin() {
+		return this.nome.equalsIgnoreCase("ADMIN");
+	}
+	
+	public boolean getProfessor() {
+		return this.nome.equalsIgnoreCase("PROFESSOR");
+	}
+	
+	public boolean getAluno() {
+		return this.nome.equalsIgnoreCase("ALUNO");
 	}
 
 }

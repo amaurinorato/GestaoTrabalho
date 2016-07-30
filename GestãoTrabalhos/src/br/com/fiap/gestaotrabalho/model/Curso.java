@@ -17,10 +17,11 @@ public class Curso implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id_Curso;
+	@Column(name="id_curso")
+	private int idCurso;
 
 	@Column(name="carga_horaria")
-	private int cargaHoraria;
+	private Integer cargaHoraria;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="dt_fim")
@@ -30,7 +31,8 @@ public class Curso implements Serializable {
 	@Column(name="dt_inicio")
 	private Date dtInicio;
 
-	private String nome_curso;
+	@Column(name="nome_curso")
+	private String nomeCurso;
 
 	//bi-directional many-to-one association to AlunoCurso
 	@OneToMany(mappedBy="curso")
@@ -46,20 +48,20 @@ public class Curso implements Serializable {
 
 	public Curso() {
 	}
-
-	public int getId_Curso() {
-		return this.id_Curso;
+	
+	public int getIdCurso() {
+		return idCurso;
 	}
 
-	public void setId_Curso(int id_Curso) {
-		this.id_Curso = id_Curso;
+	public void setIdCurso(int idCurso) {
+		this.idCurso = idCurso;
 	}
 
-	public int getCargaHoraria() {
+	public Integer getCargaHoraria() {
 		return this.cargaHoraria;
 	}
 
-	public void setCargaHoraria(int cargaHoraria) {
+	public void setCargaHoraria(Integer cargaHoraria) {
 		this.cargaHoraria = cargaHoraria;
 	}
 
@@ -79,12 +81,12 @@ public class Curso implements Serializable {
 		this.dtInicio = dtInicio;
 	}
 
-	public String getNome_curso() {
-		return this.nome_curso;
+	public String getNomeCurso() {
+		return nomeCurso;
 	}
 
-	public void setNome_curso(String nome_curso) {
-		this.nome_curso = nome_curso;
+	public void setNomeCurso(String nomeCurso) {
+		this.nomeCurso = nomeCurso;
 	}
 
 	public List<AlunoCurso> getAlunoCursos() {

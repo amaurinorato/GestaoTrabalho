@@ -16,11 +16,12 @@ public class Escola implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id_escola")
 	private int idEscola;
 
 	private String complemento;
 
-	private String endereço;
+	private String endereco;
 
 	private String nome;
 
@@ -51,12 +52,12 @@ public class Escola implements Serializable {
 		this.complemento = complemento;
 	}
 
-	public String getEndereço() {
-		return this.endereço;
+	public String getEndereco() {
+		return this.endereco;
 	}
 
-	public void setEndereço(String endereço) {
-		this.endereço = endereço;
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
 	public String getNome() {
@@ -103,5 +104,58 @@ public class Escola implements Serializable {
 
 	public void setCep(String cep) {
 		this.cep = cep;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
+		result = prime * result + ((complemento == null) ? 0 : complemento.hashCode());
+		result = prime * result + ((cursoEscolas == null) ? 0 : cursoEscolas.hashCode());
+		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
+		result = prime * result + idEscola;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((numero == null) ? 0 : numero.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Escola other = (Escola) obj;
+		if (cep == null) {
+			if (other.cep != null)
+				return false;
+		} else if (!cep.equals(other.cep))
+			return false;
+		if (complemento == null) {
+			if (other.complemento != null)
+				return false;
+		} else if (!complemento.equals(other.complemento))
+			return false;
+		if (endereco == null) {
+			if (other.endereco != null)
+				return false;
+		} else if (!endereco.equals(other.endereco))
+			return false;
+		if (idEscola != other.idEscola)
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (numero == null) {
+			if (other.numero != null)
+				return false;
+		} else if (!numero.equals(other.numero))
+			return false;
+		return true;
 	}
 }
