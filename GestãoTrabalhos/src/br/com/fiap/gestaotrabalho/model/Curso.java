@@ -18,7 +18,7 @@ public class Curso implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_curso")
-	private int idCurso;
+	private Integer idCurso;
 
 	@Column(name="carga_horaria")
 	private Integer cargaHoraria;
@@ -49,11 +49,11 @@ public class Curso implements Serializable {
 	public Curso() {
 	}
 	
-	public int getIdCurso() {
+	public Integer getIdCurso() {
 		return idCurso;
 	}
 
-	public void setIdCurso(int idCurso) {
+	public void setIdCurso(Integer idCurso) {
 		this.idCurso = idCurso;
 	}
 
@@ -155,4 +155,52 @@ public class Curso implements Serializable {
 		return cursoEscola;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cargaHoraria == null) ? 0 : cargaHoraria.hashCode());
+		result = prime * result + ((dtFim == null) ? 0 : dtFim.hashCode());
+		result = prime * result + ((dtInicio == null) ? 0 : dtInicio.hashCode());
+		result = prime * result + ((idCurso == null) ? 0 : idCurso.hashCode());
+		result = prime * result + ((nomeCurso == null) ? 0 : nomeCurso.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Curso other = (Curso) obj;
+		if (cargaHoraria == null) {
+			if (other.cargaHoraria != null)
+				return false;
+		} else if (!cargaHoraria.equals(other.cargaHoraria))
+			return false;
+		if (dtFim == null) {
+			if (other.dtFim != null)
+				return false;
+		} else if (!dtFim.equals(other.dtFim))
+			return false;
+		if (dtInicio == null) {
+			if (other.dtInicio != null)
+				return false;
+		} else if (!dtInicio.equals(other.dtInicio))
+			return false;
+		if (idCurso == null) {
+			if (other.idCurso != null)
+				return false;
+		} else if (!idCurso.equals(other.idCurso))
+			return false;
+		if (nomeCurso == null) {
+			if (other.nomeCurso != null)
+				return false;
+		} else if (!nomeCurso.equals(other.nomeCurso))
+			return false;
+		return true;
+	}
 }

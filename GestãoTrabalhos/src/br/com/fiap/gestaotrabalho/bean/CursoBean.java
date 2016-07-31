@@ -38,14 +38,11 @@ public class CursoBean implements Serializable {
 			List<CursoDisciplina> cursosDisciplinas = new ArrayList<CursoDisciplina>();
 			List<CursoEscola> cursosEscolas = new ArrayList<CursoEscola>();
 			
-			GenericDao<CursoEscola> cursoEscolaDao = new GenericDao<CursoEscola>(CursoEscola.class);
-			GenericDao<CursoDisciplina> cursoDisciplinaDao = new GenericDao<CursoDisciplina>(CursoDisciplina.class);
-			
 			for (Disciplina disciplina : selectedDisciplinas) {
 				CursoDisciplina cursoDisciplina = new CursoDisciplina();
 				cursoDisciplina.setCurso(curso);
 				cursoDisciplina.setDisciplina(disciplina);
-				//cursoDisciplinaDao.adicionar(cursoDisciplina);
+				cursosDisciplinas.add(cursoDisciplina);
 			}
 			
 			for (Escola escola : selectedEscolas) {
@@ -53,7 +50,6 @@ public class CursoBean implements Serializable {
 				cursoEscola.setCurso(curso);
 				cursoEscola.setEscola(escola);
 				cursosEscolas.add(cursoEscola);
-				//cursoEscolaDao.adicionar(cursoEscola);
 			}
 			
 			curso.setCursoDisciplinas(cursosDisciplinas);
@@ -61,6 +57,8 @@ public class CursoBean implements Serializable {
 			
 			dao.adicionar(curso);
 			curso = new Curso();
+			selectedDisciplinas = new ArrayList<Disciplina>();
+			selectedEscolas = new ArrayList<Escola>();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Curso Salvo com sucesso!"));
 
 		} catch (Exception e) {

@@ -1,5 +1,6 @@
 package br.com.fiap.gestaotrabalho.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.ManagedBean;
@@ -15,7 +16,7 @@ import br.com.fiap.gestaotrabalho.model.Usuario;
 
 @ManagedBean
 @RequestScoped
-public class UsuarioBean {
+public class UsuarioBean implements Serializable {
 
 	private Usuario usuario;
 
@@ -58,7 +59,7 @@ public class UsuarioBean {
 	public void salvarUsuario() {
 		try {
 			GenericDao<Usuario> usuarioDao = new GenericDao<Usuario>(Usuario.class);
-			usuario.setCpf(usuario.getCpf().replaceAll(".", "").replaceAll("-", ""));
+			usuario.setCpf(usuario.getCpf().replace(".", "").replace("-", ""));
 			usuarioDao.adicionar(usuario);
 			usuario = new Usuario();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Usuário salvo com sucesso!"));

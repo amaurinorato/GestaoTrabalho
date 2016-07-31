@@ -15,7 +15,7 @@
 		<h1 style="font-family: Arial;">Login</h1>
 		<p:panelGrid columns="2">
 			<p:outputLabel value="Matricula: "></p:outputLabel>
-			<p:inputText value="#{usuarioBean.usuario.matricula}" />
+			<p:inputText value="#{usuarioBean.usuario.matricula}" maxlength="9"/>
 			<p:outputLabel value="Senha"></p:outputLabel>
 			<p:password value="#{usuarioBean.usuario.senha}"></p:password>
 			<h:commandButton value="Entrar" action="#{usuarioBean.validarUsuario()}" />

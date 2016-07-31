@@ -20,6 +20,16 @@
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
+		<managed-bean-name>alunoBean</managed-bean-name>
+		<managed-bean-class>br.com.fiap.gestaotrabalho.bean.AlunoBean</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>trabalhoBean</managed-bean-name>
+		<managed-bean-class>br.com.fiap.gestaotrabalho.bean.TrabalhoBean</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
 		<managed-bean-name>disciplinaBean</managed-bean-name>
 		<managed-bean-class>br.com.fiap.gestaotrabalho.bean.DisciplinaBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>

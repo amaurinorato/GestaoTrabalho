@@ -38,6 +38,7 @@ public class DisciplinaBean implements Serializable {
 			disciplina.setDisciplinaProfessors(disciplinasProfessores);
 			disciplinaDao.adicionar(disciplina);
 			disciplina = new Disciplina();
+			selectedProfessores = new ArrayList<Usuario>();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Disciplina salva com sucesso!"));
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro ao salvar a disciplina!"));
