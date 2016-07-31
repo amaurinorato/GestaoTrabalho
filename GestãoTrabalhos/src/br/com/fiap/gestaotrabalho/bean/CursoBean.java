@@ -7,11 +7,12 @@ import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.fiap.gestaotrabalho.dao.GenericDao;
 import br.com.fiap.gestaotrabalho.model.Curso;
+import br.com.fiap.gestaotrabalho.model.CursoDisciplina;
+import br.com.fiap.gestaotrabalho.model.CursoEscola;
 import br.com.fiap.gestaotrabalho.model.Disciplina;
 import br.com.fiap.gestaotrabalho.model.Escola;
 
@@ -33,9 +34,35 @@ public class CursoBean implements Serializable {
 	public void salvarCurso() {
 		try {
 			GenericDao<Curso> dao = new GenericDao<Curso>(Curso.class);
+			
+			List<CursoDisciplina> cursosDisciplinas = new ArrayList<CursoDisciplina>();
+			List<CursoEscola> cursosEscolas = new ArrayList<CursoEscola>();
+			
+			GenericDao<CursoEscola> cursoEscolaDao = new GenericDao<CursoEscola>(CursoEscola.class);
+			GenericDao<CursoDisciplina> cursoDisciplinaDao = new GenericDao<CursoDisciplina>(CursoDisciplina.class);
+			
+			for (Disciplina disciplina : selectedDisciplinas) {
+				CursoDisciplina cursoDisciplina = new CursoDisciplina();
+				cursoDisciplina.setCurso(curso);
+				cursoDisciplina.setDisciplina(disciplina);
+				//cursoDisciplinaDao.adicionar(cursoDisciplina);
+			}
+			
+			for (Escola escola : selectedEscolas) {
+				CursoEscola cursoEscola = new CursoEscola();
+				cursoEscola.setCurso(curso);
+				cursoEscola.setEscola(escola);
+				cursosEscolas.add(cursoEscola);
+				//cursoEscolaDao.adicionar(cursoEscola);
+			}
+			
+			curso.setCursoDisciplinas(cursosDisciplinas);
+			curso.setCursoEscolas(cursosEscolas);
+			
 			dao.adicionar(curso);
 			curso = new Curso();
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Curso salvo com sucesso!"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Curso Salvo com sucesso!"));
+
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Ocorreu um erro ao salvar o curso. Tente novamente!"));
 		}

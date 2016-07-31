@@ -39,11 +39,11 @@ public class Curso implements Serializable {
 	private List<AlunoCurso> alunoCursos;
 
 	//bi-directional many-to-one association to CursoDisciplina
-	@OneToMany(mappedBy="curso")
+	@OneToMany(mappedBy="curso", cascade=CascadeType.ALL)
 	private List<CursoDisciplina> cursoDisciplinas;
 
 	//bi-directional many-to-one association to CursoEscola
-	@OneToMany(mappedBy="curso")
+	@OneToMany(mappedBy="curso", cascade=CascadeType.ALL)
 	private List<CursoEscola> cursoEscolas;
 
 	public Curso() {

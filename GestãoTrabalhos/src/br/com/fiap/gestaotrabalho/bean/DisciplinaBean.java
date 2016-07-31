@@ -1,14 +1,18 @@
 package br.com.fiap.gestaotrabalho.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.ManagedBean;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.fiap.gestaotrabalho.dao.GenericDao;
 import br.com.fiap.gestaotrabalho.dao.UsuarioDao;
 import br.com.fiap.gestaotrabalho.model.Disciplina;
+import br.com.fiap.gestaotrabalho.model.DisciplinaProfessor;
 import br.com.fiap.gestaotrabalho.model.Usuario;
 
 @ManagedBean
@@ -22,8 +26,23 @@ public class DisciplinaBean implements Serializable {
 
 	
 	public void salvarDisciplina() {
-		GenericDao<Disciplina> dao = new GenericDao<Disciplina>(Disciplina.class);
-		dao.adicionar(disciplina);
+		try {
+			GenericDao<Disciplina> disciplinaDao = new GenericDao<Disciplina>(Disciplina.class);
+			List<DisciplinaProfessor> disciplinasProfessores = new ArrayList<DisciplinaProfessor>();
+			for (Usuario usuario : selectedProfessores) {
+				DisciplinaProfessor disciplinaProfessor = new DisciplinaProfessor();
+				disciplinaProfessor.setDisciplina(disciplina);
+				disciplinaProfessor.setUsuario(usuario);
+				disciplinasProfessores.add(disciplinaProfessor);
+			}
+			disciplina.setDisciplinaProfessors(disciplinasProfessores);
+			disciplinaDao.adicionar(disciplina);
+			disciplina = new Disciplina();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Disciplina salva com sucesso!"));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Erro ao salvar a disciplina!"));
+			
+		}
 	}
 	
 	public Disciplina getDisciplina() {

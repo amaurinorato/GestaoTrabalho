@@ -16,7 +16,8 @@ public class Role implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id_Role;
+	@Column(name="id_role")
+	private int idRole;
 
 	private String descricao;
 
@@ -28,13 +29,13 @@ public class Role implements Serializable {
 	
 	public Role() {
 	}
-
-	public int getId_Role() {
-		return this.id_Role;
+	
+	public int getIdRole() {
+		return idRole;
 	}
 
-	public void setId_Role(int id_Role) {
-		this.id_Role = id_Role;
+	public void setIdRole(int idRole) {
+		this.idRole = idRole;
 	}
 
 	public String getDescricao() {
@@ -87,4 +88,37 @@ public class Role implements Serializable {
 		return this.nome.equalsIgnoreCase("ALUNO");
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + idRole;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Role other = (Role) obj;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
+		if (idRole != other.idRole)
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
+	}
 }

@@ -20,16 +20,16 @@ public class Disciplina implements Serializable {
 	private int idDisciplina;
 
 	@Column(name="carga_horaria")
-	private int cargaHoraria;
+	private Integer cargaHoraria;
 
 	private String nome;
 
 	//bi-directional many-to-one association to CursoDisciplina
-	@OneToMany(mappedBy="disciplina")
+	@OneToMany(mappedBy="disciplina", cascade=CascadeType.ALL)
 	private List<CursoDisciplina> cursoDisciplinas;
 
 	//bi-directional many-to-one association to DisciplinaProfessor
-	@OneToMany(mappedBy="disciplina")
+	@OneToMany(mappedBy="disciplina", cascade=CascadeType.ALL)
 	private List<DisciplinaProfessor> disciplinaProfessors;
 
 	//bi-directional many-to-one association to Trabalho
@@ -39,11 +39,11 @@ public class Disciplina implements Serializable {
 	public Disciplina() {
 	}
 
-	public int getCargaHoraria() {
+	public Integer getCargaHoraria() {
 		return this.cargaHoraria;
 	}
 
-	public void setCargaHoraria(int cargaHoraria) {
+	public void setCargaHoraria(Integer cargaHoraria) {
 		this.cargaHoraria = cargaHoraria;
 	}
 
@@ -149,11 +149,6 @@ public class Disciplina implements Serializable {
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
-			return false;
-		if (trabalhos == null) {
-			if (other.trabalhos != null)
-				return false;
-		} else if (!trabalhos.equals(other.trabalhos))
 			return false;
 		return true;
 	}

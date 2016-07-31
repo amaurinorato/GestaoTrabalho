@@ -9,6 +9,7 @@ import br.com.fiap.gestaotrabalho.model.Usuario;
 
 public class UsuarioDao extends GenericDao<Usuario>{
 
+	List<Usuario> usuarios;
 	public UsuarioDao() {
 		super(Usuario.class);
 	}
@@ -19,7 +20,9 @@ public class UsuarioDao extends GenericDao<Usuario>{
 		em = JpaUtil.getEntityManager();
 		Query q = em.createQuery("from Usuario u where u.role.nome like :nome");
 		q.setParameter("nome", "PROFESSOR");
-		return q.getResultList();
+		usuarios = q.getResultList();
+		em.close();
+		return usuarios;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -28,7 +31,9 @@ public class UsuarioDao extends GenericDao<Usuario>{
 		em = JpaUtil.getEntityManager();
 		Query q = em.createQuery("from Usuario u where u.role.nome like :nome");
 		q.setParameter("nome", "ALUNO");
-		return q.getResultList();
+		usuarios = q.getResultList();
+		em.close();
+		return usuarios;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -37,7 +42,9 @@ public class UsuarioDao extends GenericDao<Usuario>{
 		em = JpaUtil.getEntityManager();
 		Query q = em.createQuery("from Usuario u where u.role.nome like :nome");
 		q.setParameter("nome", "ADMIN");
-		return q.getResultList();
+		usuarios = q.getResultList();
+		em.close();
+		return usuarios;
 	}
 	
 	

@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <p:messages showDetail="true"/>
 <p:menu style="float: left; ">
-	<p:submenu label="Admin"
+	<p:submenu label="Administrativo"
 		rendered="#{sessionScope.usuario_sessao.role.admin}">
 		<p:menuitem value="Cadastrar Escola"
 			outcome="/pages/admin/cadastroEscola" icon="ui-icon-star"></p:menuitem>
@@ -14,8 +14,8 @@
 			outcome="/pages/admin/cadastroCurso" ajax="false" icon="ui-icon-star"></p:menuitem>
 		<p:menuitem value="Cadastrar Disciplina"
 			outcome="/pages/admin/cadastroDisciplina" icon="ui-icon-star"></p:menuitem>
-		<p:menuitem value="Cadastrar Professor"
-			outcome="/pages/admin/cadastroProfessor" icon="ui-icon-star"></p:menuitem>
+		<p:menuitem value="Cadastrar Usuario"
+			outcome="/pages/admin/cadastroUsuario" icon="ui-icon-star"></p:menuitem>
 	</p:submenu>
 
 	<p:submenu label="Professor"

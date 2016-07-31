@@ -14,13 +14,13 @@
 		<h1 style="font-family: Arial;">Cadastro de Curso</h1>
 		<h:panelGrid columns="2" border="0" style="margin-left: 0px"> 
 			<p:outputLabel value="Nome: " />
-			<p:inputText  value="#{cursoBean.curso.nomeCurso}" />
+			<p:inputText  value="#{cursoBean.curso.nomeCurso}" size="60"/>
 			<p:outputLabel value="Carga Horária: " />
 			<p:inputText  value="#{cursoBean.curso.cargaHoraria}" />
 			<p:outputLabel value="Data de início: " />
-			<p:calendar value="#{cursoBean.curso.dtInicio}" readonly="true"></p:calendar>
+			<p:calendar value="#{cursoBean.curso.dtInicio}" ></p:calendar>
 			<p:outputLabel value="Data fim: " />
-			<p:calendar value="#{cursoBean.curso.dtFim}" readonly="true"></p:calendar>
+			<p:calendar value="#{cursoBean.curso.dtFim}"></p:calendar>
 			<p:outputLabel value="Escolas: " />
 			<p:selectManyMenu value="#{cursoBean.selectedEscolas}" converter="escolaConverter" scrollHeight="100">
 	            <f:selectItems value="#{cursoBean.escolas}" var="escola" itemLabel="#{escola.nome}" itemValue="#{escola}" />

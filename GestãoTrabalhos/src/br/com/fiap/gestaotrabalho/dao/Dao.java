@@ -3,7 +3,7 @@ package br.com.fiap.gestaotrabalho.dao;
 import java.util.List;
 
 public interface Dao<T> {
-	void adicionar(T entidade);
+	 void adicionar(T entidade);
 	 List<T> listar();
 	 T buscar(int id); 
 	 
