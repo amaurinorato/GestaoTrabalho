@@ -49,6 +49,11 @@ public class DisciplinaBean implements Serializable {
 	public Disciplina getDisciplina() {
 		return disciplina;
 	}
+	
+	public List<Disciplina> getDisciplinas() {
+		GenericDao<Disciplina> disciplinaDao = new GenericDao<Disciplina>(Disciplina.class);
+		return disciplinaDao.listar();
+	}
 
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;

@@ -27,8 +27,32 @@
 			<p:selectOneRadio id="role" value="#{usuarioBean.usuario.role}"  layout="grid" columns="3" converter="roleConverter">
             	<f:selectItems value="#{usuarioBean.roles}" var="r" itemLabel="#{r.nome}" itemValue="#{r}"/>
         	</p:selectOneRadio>
-			<h:commandButton value="Incluir" actionListener="#{usuarioBean.salvarUsuario()}" />
+			<p:commandButton value="Incluir" actionListener="#{usuarioBean.salvarUsuario()}" ajax="false"/>
 		</h:panelGrid>
+		<br/>
+		<hr/>
+		<br/>
+		<p:dataTable var="usuario" value="#{usuarioBean.usuarios}" style="text-align: center;" >
+			<p:column headerText="Nome">
+				<h:outputText value="#{usuario.nome}" />
+			</p:column>
+
+			<p:column headerText="CPF">
+				<h:outputText value="#{usuario.cpf}" />
+			</p:column>
+
+			<p:column headerText="Email">
+				<h:outputText value="#{usuario.email}" />
+			</p:column>
+			
+			<p:column headerText="Matrícula">
+				<h:outputText value="#{usuario.matricula}" />
+			</p:column>
+			
+			<p:column headerText="Tipo de Usuário">
+				<h:outputText value="#{usuario.role.nome}" />
+			</p:column>
+		</p:dataTable>
 	</h:form>
 </h:body>
 </html>

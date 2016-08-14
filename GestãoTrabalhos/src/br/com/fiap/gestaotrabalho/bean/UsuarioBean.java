@@ -23,6 +23,11 @@ public class UsuarioBean implements Serializable {
 	public Usuario getUsuario() {
 		return usuario;
 	}
+	
+	public List<Usuario> getUsuarios() {
+		GenericDao<Usuario> dao = new GenericDao<Usuario>(Usuario.class);
+		return dao.listar();
+	}
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;

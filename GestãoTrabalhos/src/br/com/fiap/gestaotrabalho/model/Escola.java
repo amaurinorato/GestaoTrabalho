@@ -28,6 +28,9 @@ public class Escola implements Serializable {
 	private String numero;
 	
 	private String cep;
+	
+	@Transient
+	private String enderecoCompleto;
 
 	//bi-directional many-to-one association to CursoEscola
 	@OneToMany(mappedBy="escola")
@@ -158,4 +161,10 @@ public class Escola implements Serializable {
 			return false;
 		return true;
 	}
+
+	public String getEnderecoCompleto() {
+		return endereco + ", " + numero + " " + complemento;
+	}
+	
+	
 }

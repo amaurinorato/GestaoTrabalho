@@ -12,19 +12,36 @@
 	<h:form>
 		<ui:include src="../menu.xhtml"></ui:include>
 		<h1 style="font-family: Arial;">Cadastro de Escola</h1>
-		<h:panelGrid columns="2" border="0" style="margin-left: 0px"> 
+		<h:panelGrid columns="2" border="0" style="margin-left: 0px">
 			<p:outputLabel value="Nome: " />
-			<p:inputText  value="#{escolaBean.escola.nome}" />
+			<p:inputText value="#{escolaBean.escola.nome}" />
 			<p:outputLabel value="Cep: " />
-			<p:inputText  value="#{escolaBean.escola.cep}" />
+			<p:inputMask value="#{escolaBean.escola.cep}" mask="99999-999"/>
 			<p:outputLabel value="Endereço: " />
-			<p:inputText  value="#{escolaBean.escola.endereco}" size="60"/>
+			<p:inputText value="#{escolaBean.escola.endereco}" size="60" />
 			<p:outputLabel value="Número: " />
-			<p:inputText  value="#{escolaBean.escola.numero}" />
+			<p:inputText value="#{escolaBean.escola.numero}" />
 			<p:outputLabel value="Complemento: " />
-			<p:inputText  value="#{escolaBean.escola.complemento}" />
-			<h:commandButton value="Incluir" actionListener="#{escolaBean.salvarEscola()}" />
+			<p:inputText value="#{escolaBean.escola.complemento}" />
+			<p:commandButton value="Incluir" ajax="false"
+				actionListener="#{escolaBean.salvarEscola()}" />
 		</h:panelGrid>
+		<br/>
+		<hr/>
+		<br/>
+		<p:dataTable var="escola" value="#{escolaBean.escolas}">
+			<p:column headerText="Nome">
+				<h:outputText value="#{escola.nome}" />
+			</p:column>
+
+			<p:column headerText="CEP">
+				<h:outputText value="#{escola.cep}" />
+			</p:column>
+
+			<p:column headerText="Endereço">
+				<h:outputText value="#{escola.enderecoCompleto}" />
+			</p:column>
+		</p:dataTable>
 	</h:form>
 </h:body>
 </html>

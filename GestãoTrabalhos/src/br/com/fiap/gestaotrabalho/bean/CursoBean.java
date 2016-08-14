@@ -69,6 +69,11 @@ public class CursoBean implements Serializable {
 	public Curso getCurso() {
 		return curso;
 	}
+	
+	public List<Curso> getCursos() {
+		GenericDao<Curso> dao = new GenericDao<Curso>(Curso.class);
+		return dao.listar();
+	}
 
 	public void setCurso(Curso curso) {
 		this.curso = curso;

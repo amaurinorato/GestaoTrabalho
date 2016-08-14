@@ -18,7 +18,7 @@
 			<p:inputText value="#{usuarioBean.usuario.matricula}" maxlength="9"/>
 			<p:outputLabel value="Senha"></p:outputLabel>
 			<p:password value="#{usuarioBean.usuario.senha}"></p:password>
-			<h:commandButton value="Entrar" action="#{usuarioBean.validarUsuario()}" />
+			<p:commandButton ajax="false" value="Entrar" action="#{usuarioBean.validarUsuario()}" />
 		</p:panelGrid>
 	</h:form>
 </h:body>

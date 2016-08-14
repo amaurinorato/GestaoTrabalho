@@ -29,8 +29,58 @@
 			<p:selectManyMenu value="#{cursoBean.selectedDisciplinas}" converter="disciplinaConverter" scrollHeight="100">
 	            <f:selectItems value="#{cursoBean.disciplinas}" var="disciplina" itemLabel="#{disciplina.nome}" itemValue="#{disciplina}" />
 	        </p:selectManyMenu>
-			<h:commandButton value="Incluir" actionListener="#{cursoBean.salvarCurso()}" />
+			<p:commandButton value="Incluir" actionListener="#{cursoBean.salvarCurso()}" ajax="false"/>
 		</h:panelGrid>
+		<br/>
+		<hr/>
+		<br/>
+		<p:dataTable var="curso" value="#{cursoBean.cursos}" style="text-align: center;" >
+			<p:column headerText="Nome">
+				<h:outputText value="#{curso.nomeCurso}" />
+			</p:column>
+
+			<p:column headerText="Carga Horária">
+				<h:outputText value="#{curso.cargaHoraria}" />
+			</p:column>
+
+			<p:column headerText="Data Inicio">
+				<h:outputText value="#{curso.dtInicio}" >
+					<f:convertDateTime>
+					</f:convertDateTime>
+				</h:outputText>
+			</p:column>
+			
+			<p:column headerText="Data Fim">
+				<h:outputText value="#{curso.dtFim}" >
+					<f:convertDateTime>
+					</f:convertDateTime>
+				</h:outputText>
+			</p:column>
+			
+			<p:column headerText="Escolas">
+				<p:commandLink value="Ver Escolas" oncomplete="PF('verEscolas').show();" update="listEscolas" 
+					action="#{cursoBean.setCurso(curso)}" />
+			</p:column>
+			<p:column headerText="Disciplinas">
+				<p:commandLink value="Ver Disciplinas" action="#{cursoBean.setCurso(curso)}" 
+						oncomplete="PF('verDisciplinas').show();" update="listDisciplinas"/>
+			</p:column>
+		</p:dataTable>
 	</h:form>
+	<p:dialog header="Escolas" widgetVar="verEscolas" minHeight="100" id="listEscolas" width="500px">
+	   	<p:dataTable var="escola" value="#{cursoBean.curso.cursoEscolas}" style="text-align: center;" >
+	   		<p:column width="100px;">
+				<h:outputText value="#{escola.escola.nome}" />
+			</p:column>
+	   	</p:dataTable>
+	</p:dialog>
+	<p:dialog header="Disciplinas" widgetVar="verDisciplinas" minHeight="100" id="listDisciplinas" width="500px">
+	   	<p:dataTable var="disciplina" value="#{cursoBean.curso.cursoDisciplinas}" style="text-align: center;" >
+	   		<p:column width="100px;">
+				<h:outputText value="#{disciplina.disciplina.nome}" />
+			</p:column>
+	   	</p:dataTable>
+	</p:dialog>
+	
 </h:body>
 </html>

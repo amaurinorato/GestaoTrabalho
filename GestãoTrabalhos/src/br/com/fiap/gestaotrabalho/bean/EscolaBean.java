@@ -1,5 +1,7 @@
 package br.com.fiap.gestaotrabalho.bean;
 
+import java.util.List;
+
 import javax.annotation.ManagedBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
@@ -17,6 +19,11 @@ public class EscolaBean {
 	public Escola getEscola() {
 		return escola;
 	}
+	
+	public List<Escola> getEscolas() {
+		GenericDao<Escola> dao = new GenericDao<Escola>(Escola.class);
+		return dao.listar();
+	}
 
 	public void setEscola(Escola escola) {
 		this.escola = escola;
@@ -29,6 +36,7 @@ public class EscolaBean {
 	public void salvarEscola() {
 		try {
 			GenericDao<Escola> dao = new GenericDao<Escola>(Escola.class);
+			escola.setCep(escola.getCep().replace("-", ""));
 			dao.adicionar(escola);
 			escola = new Escola();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Escola salva com sucesso!"));

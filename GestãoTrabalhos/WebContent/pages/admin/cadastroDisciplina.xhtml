@@ -21,8 +21,28 @@
 			<p:selectManyMenu value="#{disciplinaBean.selectedProfessores}" converter="usuarioConverter" scrollHeight="100">
 	            <f:selectItems value="#{disciplinaBean.professores}" var="professor" itemLabel="#{professor.nome}" itemValue="#{professor}" />
 	        </p:selectManyMenu>
-			<h:commandButton value="Incluir" actionListener="#{disciplinaBean.salvarDisciplina()}" />
+			<p:commandButton ajax="false" value="Incluir" actionListener="#{disciplinaBean.salvarDisciplina()}" />
 		</h:panelGrid>
+		<br/>
+		<hr/>
+		<br/>
+		<p:dataTable emptyMessage="Disciplina sem professores cadastrados!" var="disciplina" value="#{disciplinaBean.disciplinas}" style="text-align: center;" >
+			<p:column headerText="Nome">
+				<h:outputText value="#{disciplina.nome}" />
+			</p:column>
+			
+			<p:column headerText="Professores">
+				<p:commandLink value="Ver Professores" oncomplete="PF('verProfessores').show();" 
+					update="listProfessores" action="#{disciplinaBean.setDisciplina(disciplina)}"/>
+			</p:column>
+		</p:dataTable>
 	</h:form>
+	<p:dialog  header="Professores" widgetVar="verProfessores" minHeight="100" id="listProfessores" width="500px">
+	   	<p:dataTable var="professor" value="#{disciplinaBean.disciplina.disciplinaProfessors}" style="text-align: center;" >
+	   		<p:column width="100px;">
+				<h:outputText value="#{professor.usuario.nome}" />
+			</p:column>
+	   	</p:dataTable>
+	</p:dialog>
 </h:body>
 </html>
