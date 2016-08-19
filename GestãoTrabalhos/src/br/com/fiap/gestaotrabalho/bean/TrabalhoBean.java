@@ -13,9 +13,11 @@ import br.com.fiap.gestaotrabalho.dao.CursoDao;
 import br.com.fiap.gestaotrabalho.dao.Dao;
 import br.com.fiap.gestaotrabalho.dao.DisciplinaDao;
 import br.com.fiap.gestaotrabalho.dao.GenericDao;
+import br.com.fiap.gestaotrabalho.dao.UsuarioDao;
 import br.com.fiap.gestaotrabalho.model.Curso;
 import br.com.fiap.gestaotrabalho.model.Disciplina;
 import br.com.fiap.gestaotrabalho.model.Trabalho;
+import br.com.fiap.gestaotrabalho.model.TrabalhoAluno;
 import br.com.fiap.gestaotrabalho.model.Usuario;
 
 @ViewScoped
@@ -26,7 +28,9 @@ public class TrabalhoBean implements Serializable {
 	private List<Disciplina> disciplinas;
 	private Curso curso;
 	private Trabalho trabalho;
-
+	private List<Usuario> alunos;
+	private Usuario aluno;
+	private TrabalhoAluno trabalhoAluno;
 
 	public TrabalhoBean() {
 		trabalho = new Trabalho();
@@ -68,6 +72,14 @@ public class TrabalhoBean implements Serializable {
 		}
 		return disciplinas;
 	}
+	
+	public List<Usuario> getAlunos() {
+		if(trabalho.getDisciplina() != null && (alunos == null || alunos.size() <= 0)) {
+			UsuarioDao dDao = new UsuarioDao();
+			alunos = dDao.listarAlunos();
+		}
+		return alunos;
+	}
 	public Trabalho getTrabalho() {
 		return trabalho;
 	}
@@ -76,5 +88,19 @@ public class TrabalhoBean implements Serializable {
 		this.trabalho = trabalho;
 	}
 
+	public Usuario getAluno() {
+		return aluno;
+	}
 
+	public void setAluno(Usuario aluno) {
+		this.aluno = aluno;
+	}
+
+	public TrabalhoAluno getTrabalhoAluno() {
+		return trabalhoAluno;
+	}
+
+	public void setTrabalhoAluno(TrabalhoAluno trabalhoAluno) {
+		this.trabalhoAluno = trabalhoAluno;
+	}
 }

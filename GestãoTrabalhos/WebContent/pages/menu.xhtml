@@ -16,12 +16,14 @@
 			outcome="/pages/admin/cadastroDisciplina" icon="ui-icon-star"></p:menuitem>
 		<p:menuitem value="Cadastrar Usuario"
 			outcome="/pages/admin/cadastroUsuario" icon="ui-icon-star"></p:menuitem>
+		<p:menuitem value="Matricular Aluno"
+			outcome="/pages/admin/matricularAluno" icon="ui-icon-star"></p:menuitem>
 	</p:submenu>
 
 	<p:submenu label="Professor"
 		rendered="#{sessionScope.usuario_sessao.role.professor}">
-		<p:menuitem value="Cadastrar Nota"
-			outcome="/pages/professor/cadastroNota" icon="ui-icon-star"></p:menuitem>
+		<p:menuitem value="Corrigir Trabalho"
+			outcome="/pages/professor/corrigirTrabalho" icon="ui-icon-star"></p:menuitem>
 		<p:menuitem value="Cadastrar Trabalhos"
 			outcome="/pages/professor/cadastroTrabalho" icon="ui-icon-star"></p:menuitem>
 	</p:submenu>

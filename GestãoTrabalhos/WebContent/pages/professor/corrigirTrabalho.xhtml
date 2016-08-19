@@ -5,13 +5,13 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Cadastro de trabalhos</title>
+	<title>Cadastro de nota</title>
 </h:head>
 
 <h:body>
 	<h:form>
 		<ui:include src="../menu.xhtml"></ui:include>
-		<h1 style="font-family: Arial;">Cadastro de trabalhos</h1>
+		<h1 style="font-family: Arial;">Correção de trabalhos</h1>
 		<h:panelGrid columns="2" border="0" style="margin-left: 0px" id="png"> 
 			<p:outputLabel value="Curso: " />
 			<p:selectOneMenu value="#{trabalhoBean.curso}" converter="cursoConverter" scrollHeight="100"  >
@@ -23,9 +23,15 @@
 			<p:selectOneMenu id="selDisciplina" value="#{trabalhoBean.trabalho.disciplina}" converter="disciplinaConverter" scrollHeight="100" rendered="#{trabalhoBean.disciplinas != null}">
 	           	<f:selectItem  	itemLabel="Selecione" itemValue="#{null}" />
 	            <f:selectItems value="#{trabalhoBean.disciplinas}" var="disciplina" itemLabel="#{disciplina.nome}" itemValue="#{disciplina}" />
+	            <p:ajax event="change" listener="#{trabalhoBean.getAlunos}" update="png" ></p:ajax>
 	        </p:selectOneMenu>
-	        <p:outputLabel value="Descrição: " />
-			<p:inputTextarea value="#{trabalhoBean.trabalho.descricao}" scrollHeight="5" />
+	        <p:outputLabel value="Aluno: " rendered="#{trabalhoBean.alunos != null}"/>
+			<p:selectOneMenu id="selAluno" value="#{trabalhoBean.trabalhoAluno.usuario}" converter="usuarioConverter" scrollHeight="100" rendered="#{trabalhoBean.alunos != null}">
+	           	<f:selectItem  	itemLabel="Selecione" itemValue="#{null}" />
+	            <f:selectItems value="#{trabalhoBean.alunos}" var="aluno" itemLabel="#{aluno.nome}" itemValue="#{aluno}" />
+	        </p:selectOneMenu>
+	        <p:outputLabel value="Nota: " />
+			<p:inputText value="#{trabalhoBean.trabalhoAluno.nota}" scrollHeight="5" />
 			<p:commandButton value="Incluir" actionListener="#{trabalhoBean.salvarTrabalho()}" ajax="false"/>
 		</h:panelGrid>
 	</h:form>

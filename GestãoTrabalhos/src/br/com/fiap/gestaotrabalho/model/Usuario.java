@@ -30,7 +30,7 @@ public class Usuario implements Serializable {
 	private String senha;
 
 	//bi-directional many-to-one association to AlunoCurso
-	@OneToMany(mappedBy="usuario")
+	@OneToMany(mappedBy="aluno")
 	private List<AlunoCurso> alunoCursos;
 
 	//bi-directional many-to-one association to DisciplinaProfessor
@@ -99,14 +99,14 @@ public class Usuario implements Serializable {
 
 	public AlunoCurso addAlunoCurso(AlunoCurso alunoCurso) {
 		getAlunoCursos().add(alunoCurso);
-		alunoCurso.setUsuario(this);
+		alunoCurso.setAluno(this);
 
 		return alunoCurso;
 	}
 
 	public AlunoCurso removeAlunoCurso(AlunoCurso alunoCurso) {
 		getAlunoCursos().remove(alunoCurso);
-		alunoCurso.setUsuario(null);
+		alunoCurso.setAluno(null);
 
 		return alunoCurso;
 	}

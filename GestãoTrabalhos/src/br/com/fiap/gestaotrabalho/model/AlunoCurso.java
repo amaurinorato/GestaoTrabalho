@@ -29,7 +29,7 @@ public class AlunoCurso implements Serializable {
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
 	@JoinColumn(name="id_aluno")
-	private Usuario usuario;
+	private Usuario aluno;
 
 	//bi-directional many-to-one association to Curso
 	@ManyToOne
@@ -47,12 +47,12 @@ public class AlunoCurso implements Serializable {
 		this.id_Aluno_curso = id_Aluno_curso;
 	}
 
-	public Usuario getUsuario() {
-		return this.usuario;
+	public Usuario getAluno() {
+		return aluno;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setAluno(Usuario aluno) {
+		this.aluno = aluno;
 	}
 
 	public Curso getCurso() {
