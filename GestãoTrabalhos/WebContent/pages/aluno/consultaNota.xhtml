@@ -12,9 +12,27 @@
 	<h:form>
 		<ui:include src="../menu.xhtml"></ui:include>
 		<h1 style="font-family: Arial;">Consulta de Nota</h1>
-		<p:dataTable>
-			
+		<p:dataTable value="#{alunoBean.cursosAluno}" var="c">
+			<p:column headerText="Nome Curso" >
+				<h:outputText value="#{c.nomeCurso}"/>
+			</p:column>
+			<p:column headerText="Resultado por Disciplina" >
+				<p:commandLink actionListener="#{alunoBean.verPorDisciplina(v.idCurso)}" value="Visualizar" oncomplete="PF('verPorDisciplina').show();" update="@form"></p:commandLink>
+			</p:column>
 		</p:dataTable>
+		<p:dialog header="Disciplinas" widgetVar="verPorDisciplina" minHeight="100" id="verPorDisciplina" width="500px">
+		   	<p:dataTable var="disciplina" value="#{alunoBean.disciplinas}" style="text-align: center;" >
+		   		<p:column width="100px;"> 
+					<h:outputText value="#{disciplina.nome}" />
+				</p:column>
+				<p:column width="100px;">
+					<h:outputText value="#{disciplina.notaFinal}" />
+				</p:column>
+				<p:column width="100px;">
+					<h:outputText value="#{disciplina.status}" />
+				</p:column>
+		   	</p:dataTable>
+		</p:dialog>
 	</h:form>
 </h:body>
 </html>

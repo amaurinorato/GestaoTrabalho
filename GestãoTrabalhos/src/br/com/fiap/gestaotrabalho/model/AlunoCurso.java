@@ -2,6 +2,7 @@ package br.com.fiap.gestaotrabalho.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +25,8 @@ public class AlunoCurso implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id_Aluno_curso;
+	@Column(name="id_Aluno_Curso")
+	private int idAlunoCurso;
 
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
@@ -38,13 +40,13 @@ public class AlunoCurso implements Serializable {
 
 	public AlunoCurso() {
 	}
-
-	public int getId_Aluno_curso() {
-		return this.id_Aluno_curso;
+	
+	public int getIdAlunoCurso() {
+		return idAlunoCurso;
 	}
 
-	public void setId_Aluno_curso(int id_Aluno_curso) {
-		this.id_Aluno_curso = id_Aluno_curso;
+	public void setIdAlunoCurso(int idAlunoCurso) {
+		this.idAlunoCurso = idAlunoCurso;
 	}
 
 	public Usuario getAluno() {

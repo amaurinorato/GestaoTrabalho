@@ -16,7 +16,8 @@ public class TrabalhoAluno implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id_Trabalho_aluno;
+	@Column(name="id_Trabalho_aluno")
+	private int idTrabalhoAluno;
 
 	private double nota;
 
@@ -33,13 +34,15 @@ public class TrabalhoAluno implements Serializable {
 	public TrabalhoAluno() {
 	}
 
-	public int getId_Trabalho_aluno() {
-		return this.id_Trabalho_aluno;
+	public int getIdTrabalhoAluno() {
+		return idTrabalhoAluno;
 	}
 
-	public void setId_Trabalho_aluno(int id_Trabalho_aluno) {
-		this.id_Trabalho_aluno = id_Trabalho_aluno;
+	public void setIdTrabalhoAluno(int idTrabalhoAluno) {
+		this.idTrabalhoAluno = idTrabalhoAluno;
 	}
+
+
 
 	public double getNota() {
 		return this.nota;

@@ -23,6 +23,12 @@
 			<p:selectOneMenu id="selDisciplina" value="#{trabalhoBean.trabalho.disciplina}" converter="disciplinaConverter" scrollHeight="100" rendered="#{trabalhoBean.disciplinas != null}">
 	           	<f:selectItem  	itemLabel="Selecione" itemValue="#{null}" />
 	            <f:selectItems value="#{trabalhoBean.disciplinas}" var="disciplina" itemLabel="#{disciplina.nome}" itemValue="#{disciplina}" />
+	            <p:ajax event="change" listener="#{trabalhoBean.getTrabalhos}" update="png" ></p:ajax>
+	        </p:selectOneMenu>
+	        <p:outputLabel value="Trabalho: " rendered="#{trabalhoBean.trabalhos != null}"/>
+			<p:selectOneMenu id="selTrabalho" value="#{trabalhoBean.trabalhoAluno.trabalho}" converter="trabalhoConverter" scrollHeight="100" rendered="#{trabalhoBean.trabalhos != null}">
+	           	<f:selectItem  	itemLabel="Selecione" itemValue="#{null}" />
+	            <f:selectItems value="#{trabalhoBean.trabalhos}" var="trabalho" itemLabel="#{trabalho.nome}" itemValue="#{trabalho}" />
 	            <p:ajax event="change" listener="#{trabalhoBean.getAlunos}" update="png" ></p:ajax>
 	        </p:selectOneMenu>
 	        <p:outputLabel value="Aluno: " rendered="#{trabalhoBean.alunos != null}"/>
@@ -32,7 +38,7 @@
 	        </p:selectOneMenu>
 	        <p:outputLabel value="Nota: " />
 			<p:inputText value="#{trabalhoBean.trabalhoAluno.nota}" scrollHeight="5" />
-			<p:commandButton value="Incluir" actionListener="#{trabalhoBean.salvarTrabalho()}" ajax="false"/>
+			<p:commandButton value="Incluir" actionListener="#{trabalhoBean.corrigirTrabalho()}" ajax="false"/>
 		</h:panelGrid>
 	</h:form>
 </h:body>

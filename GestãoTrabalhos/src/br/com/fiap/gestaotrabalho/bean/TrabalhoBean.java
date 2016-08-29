@@ -9,10 +9,13 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.exception.ConstraintViolationException;
+
 import br.com.fiap.gestaotrabalho.dao.CursoDao;
 import br.com.fiap.gestaotrabalho.dao.Dao;
 import br.com.fiap.gestaotrabalho.dao.DisciplinaDao;
 import br.com.fiap.gestaotrabalho.dao.GenericDao;
+import br.com.fiap.gestaotrabalho.dao.TrabalhoDao;
 import br.com.fiap.gestaotrabalho.dao.UsuarioDao;
 import br.com.fiap.gestaotrabalho.model.Curso;
 import br.com.fiap.gestaotrabalho.model.Disciplina;
@@ -31,9 +34,11 @@ public class TrabalhoBean implements Serializable {
 	private List<Usuario> alunos;
 	private Usuario aluno;
 	private TrabalhoAluno trabalhoAluno;
+	private List<Trabalho> trabalhos;
 
 	public TrabalhoBean() {
 		trabalho = new Trabalho();
+		trabalhoAluno = new TrabalhoAluno();
 	}
 
 	public void salvarTrabalho() {
@@ -46,6 +51,24 @@ public class TrabalhoBean implements Serializable {
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Ocorreu um erro ao salvar o trabalho. Tente novamente!"));
 		}
+	}
+	
+	public void corrigirTrabalho() {
+		try {
+			Dao<TrabalhoAluno> tDao = new GenericDao<TrabalhoAluno>(TrabalhoAluno.class);
+			tDao.adicionar(trabalhoAluno);
+			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Trabalho corrigido com sucesso!"));
+		} catch (Exception e) {
+			if (e.getCause().getClass().equals(ConstraintViolationException.class)) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Nota Já cadastrada para o trablho e o aluno selecionado!!"));
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Ocorreu um erro ao corrigir o trabalho. Tente novamente!"));
+			}
+		} 
+		trabalho = new Trabalho();
+		curso = new Curso();
+		trabalhoAluno = new TrabalhoAluno();
 	}
 	
 	public List<Curso> getCursos() {
@@ -66,7 +89,7 @@ public class TrabalhoBean implements Serializable {
 	}
 
 	public List<Disciplina> getDisciplinas() {
-		if(curso != null && (disciplinas == null || disciplinas.size() <= 0)) {
+		if(curso != null) {
 			DisciplinaDao dDao = new DisciplinaDao();
 			disciplinas = dDao.recuperarDisciplinasDoCurso(curso);
 		}
@@ -74,9 +97,9 @@ public class TrabalhoBean implements Serializable {
 	}
 	
 	public List<Usuario> getAlunos() {
-		if(trabalho.getDisciplina() != null && (alunos == null || alunos.size() <= 0)) {
+		if(trabalhoAluno.getTrabalho() != null) {
 			UsuarioDao dDao = new UsuarioDao();
-			alunos = dDao.listarAlunos();
+			alunos = dDao.listarAlunosPorCurso(curso);
 		}
 		return alunos;
 	}
@@ -102,5 +125,15 @@ public class TrabalhoBean implements Serializable {
 
 	public void setTrabalhoAluno(TrabalhoAluno trabalhoAluno) {
 		this.trabalhoAluno = trabalhoAluno;
+	}
+	
+	public List<Trabalho> getTrabalhos() {
+		if (trabalho.getDisciplina() != null) {
+			TrabalhoDao tDao = new TrabalhoDao();
+			HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+			Usuario u = (Usuario) session.getAttribute("usuario_sessao");
+			trabalhos = tDao.listarTrabalhosPorDisciplina(trabalho.getDisciplina(), u);
+		}
+		return trabalhos;
 	}
 }

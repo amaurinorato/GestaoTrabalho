@@ -28,4 +28,16 @@ public class CursoDao extends GenericDao<Curso> {
 		return cursos;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Curso> recuperarCursosPorAluno(Usuario aluno) {
+		EntityManager em = JpaUtil.getEntityManager();
+		em = JpaUtil.getEntityManager();
+		Query q = em.createQuery("Select c from Curso c INNER JOIN c.alunoCursos ac "
+				+ "INNER JOIN ac.aluno a where ac.aluno.idUsuario = :idUsuario");
+		q.setParameter("idUsuario", aluno.getIdUsuario());
+		cursos = q.getResultList();
+		em.close();
+		return cursos;
+	}
+	
 }

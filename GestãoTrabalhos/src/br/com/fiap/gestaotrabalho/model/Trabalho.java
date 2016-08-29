@@ -29,6 +29,10 @@ public class Trabalho implements Serializable {
 	//bi-directional many-to-one association to TrabalhoAluno
 	@OneToMany(mappedBy="trabalho")
 	private List<TrabalhoAluno> trabalhoAlunos;
+	
+	private Integer peso;
+	
+	private String nome;
 
 	public Trabalho() {
 	}
@@ -79,4 +83,55 @@ public class Trabalho implements Serializable {
 		return trabalhoAluno;
 	}
 
+	public Integer getPeso() {
+		return peso;
+	}
+
+	public void setPeso(Integer peso) {
+		this.peso = peso;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + idTrabalho;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((peso == null) ? 0 : peso.hashCode());
+		result = prime * result + ((trabalhoAlunos == null) ? 0 : trabalhoAlunos.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Trabalho other = (Trabalho) obj;
+		if (idTrabalho != other.idTrabalho)
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (peso == null) {
+			if (other.peso != null)
+				return false;
+		} else if (!peso.equals(other.peso))
+			return false;
+		return true;
+	}
 }

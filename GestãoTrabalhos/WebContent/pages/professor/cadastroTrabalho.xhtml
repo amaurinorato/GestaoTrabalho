@@ -24,6 +24,10 @@
 	           	<f:selectItem  	itemLabel="Selecione" itemValue="#{null}" />
 	            <f:selectItems value="#{trabalhoBean.disciplinas}" var="disciplina" itemLabel="#{disciplina.nome}" itemValue="#{disciplina}" />
 	        </p:selectOneMenu>
+			<p:outputLabel value="Nome: " />
+			<p:inputText value="#{trabalhoBean.trabalho.nome}" maxlength="45" />
+	        <p:outputLabel value="Peso: %" />
+			<p:inputMask mask="99" value="#{trabalhoBean.trabalho.peso}" maxlength="2" />
 	        <p:outputLabel value="Descrição: " />
 			<p:inputTextarea value="#{trabalhoBean.trabalho.descricao}" scrollHeight="5" />
 			<p:commandButton value="Incluir" actionListener="#{trabalhoBean.salvarTrabalho()}" ajax="false"/>
